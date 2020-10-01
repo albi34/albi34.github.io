@@ -12,6 +12,7 @@ import {
   selectHeaderRatio,
   selectHeaderComputedColors,
   selectTextColor,
+  selectColorsVariation,
 } from './selectors';
 
 export function Picker() {
@@ -20,10 +21,17 @@ export function Picker() {
   const headerColor =  useSelector(selectHeaderColor);
   const headerRatio = useSelector(selectHeaderRatio);
   const headerComputedColors = useSelector(selectHeaderComputedColors);
+  const colorsVariation = useSelector(selectColorsVariation);
   const textColor = useSelector(selectTextColor);
   const onChangeColor = (evt: PickerEvent) => {
     dispatch(actions.changeColor(evt.hex));
     console.log(headerColor);
+  }; 
+  const onChangeColorVariation = (
+    evt: React.ChangeEvent<HTMLInputElement>,
+    variation: string ) => {
+    dispatch(actions.changeColorVariation({ value: evt.currentTarget.value, key: variation}));
+    dispatch(actions.changeColor(headerColor));
   };
 
   const chroma: any = require('chroma-js');
@@ -31,6 +39,9 @@ export function Picker() {
   return (
     <>
       <Title as="h2">Select a color</Title>
+      Variation low: <input type="text" onChange={ e => onChangeColorVariation(e, "low") } value={colorsVariation.low}></input>
+      Variation medium: <input type="text" onChange={ e => onChangeColorVariation(e, "medium") } value={colorsVariation.medium}></input>
+      Variation high: <input type="text" onChange={ e => onChangeColorVariation(e, "high") } value={colorsVariation.high}></input>
       <SketchPicker 
         color={ headerColor }
         onChangeComplete={ onChangeColor }
@@ -38,7 +49,7 @@ export function Picker() {
         <ContrastRatio ratio={headerRatio}/>
         <List>
           {Object.keys(headerComputedColors).map( item => (
-            <ColorizedDiv txtcolor={textColor} bgcolor={headerComputedColors[item]}>{item}</ColorizedDiv>
+            <ColorizedDiv key={item} txtcolor={textColor} bgcolor={headerComputedColors[item]}>{item}</ColorizedDiv>
           ))}
           </List>
     </>

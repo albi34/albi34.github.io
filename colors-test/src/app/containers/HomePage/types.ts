@@ -22,6 +22,11 @@ export type HeaderColors = {
   buttonPlusPressed: string;
   buttonPlusIcon: string;
 }
+export type ColorsVariation = {
+  high: number;
+  medium: number;
+  low: number;
+}
 
 /* --- STATE --- */
 export interface PickerState {
@@ -29,6 +34,7 @@ export interface PickerState {
   headerComputedColors: HeaderColors | {}; 
   headerRatio: string; 
   textColor: string;
+  colorsVariation: ColorsVariation;
 }
 /* 
   If you want to use 'ContainerState' keyword everywhere in your feature folder, 

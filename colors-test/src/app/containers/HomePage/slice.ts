@@ -20,7 +20,12 @@ export const initialState: ContainerState = {
   headerColor: "#000000",
   headerComputedColors: {},
   headerRatio: "1",
-  textColor: "#000000"
+  textColor: "#000000",
+  colorsVariation: {
+    high: 1.5,
+    medium: 1,
+    low: 0.5
+  }
 };
 
 const chroma: any = require('chroma-js');
@@ -28,76 +33,82 @@ const pickerSlice = createSlice({
   name: 'Picker',
   initialState,
   reducers: {
+    changeColorVariation(state, action: PayloadAction<any>) {      
+      state.colorsVariation[action.payload.key] = action.payload.value;      
+    },
     changeColor(state, action: PayloadAction<string>) {
       state.headerColor = action.payload;
       state.headerRatio = chroma.contrast(action.payload, "#ffffff");
       let nbRatio = Number(state.headerRatio);
+      let colorHigher = state.colorsVariation.high;
+      let colorMed = state.colorsVariation.medium;
+      let colorLow = state.colorsVariation.low;
       if(nbRatio <= 1.2 ) {        
         state.textColor = chroma('gray').luminance(0).hex();
         state.headerComputedColors = {
           buttonStatus: state.headerColor ,
-          buttonStatusHover: chroma(state.headerColor).darken().hex(),
-          buttonStatusPressed:  chroma(state.headerColor).darken(2).hex(),
-          searchBar: chroma(state.headerColor).darken().hex(),
-          searchBarHover: chroma(state.headerColor).darken(2).hex(),
-          searchBarPressed: chroma(state.headerColor).darken(3).hex(),
+          buttonStatusHover: chroma(state.headerColor).darken(colorLow).hex(),
+          buttonStatusPressed:  chroma(state.headerColor).darken(colorMed).hex(),
+          searchBar: chroma(state.headerColor).darken(colorLow).hex(),
+          searchBarHover: chroma(state.headerColor).darken(colorMed).hex(),
+          searchBarPressed: chroma(state.headerColor).darken(colorHigher).hex(),
           buttonDevice: state.headerColor ,
-          buttonDeviceHover: chroma(state.headerColor).darken().hex(),
-          buttonDevicePressed: chroma(state.headerColor).darken(2).hex(),
+          buttonDeviceHover: chroma(state.headerColor).darken(colorLow).hex(),
+          buttonDevicePressed: chroma(state.headerColor).darken(colorMed).hex(),
           buttonPlus: state.headerColor ,
-          buttonPlusHover: chroma(state.headerColor).darken().hex(),
-          buttonPlusPressed: chroma(state.headerColor).darken(2).hex()
+          buttonPlusHover: chroma(state.headerColor).darken(colorLow).hex(),
+          buttonPlusPressed: chroma(state.headerColor).darken(colorMed).hex()
         };  
       }
       if(nbRatio > 1.2 && nbRatio <= 4.75) {
         state.textColor = chroma('gray').luminance(0).hex();
         state.headerComputedColors = {
           buttonStatus: state.headerColor ,
-          buttonStatusHover: chroma(state.headerColor).brighten().hex(),
-          buttonStatusPressed:  chroma(state.headerColor).brighten(2).hex(),
-          searchBar: chroma(state.headerColor).brighten().hex(),
-          searchBarHover: chroma(state.headerColor).brighten().hex(),
-          searchBarPressed: chroma(state.headerColor).brighten(2).hex(),
+          buttonStatusHover: chroma(state.headerColor).brighten(colorLow).hex(),
+          buttonStatusPressed:  chroma(state.headerColor).brighten(colorMed).hex(),
+          searchBar: chroma(state.headerColor).brighten(colorLow).hex(),
+          searchBarHover: chroma(state.headerColor).brighten(colorLow).hex(),
+          searchBarPressed: chroma(state.headerColor).brighten(colorMed).hex(),
           buttonDevice: state.headerColor ,
-          buttonDeviceHover: chroma(state.headerColor).brighten().hex(),
-          buttonDevicePressed: chroma(state.headerColor).brighten(2).hex(),
+          buttonDeviceHover: chroma(state.headerColor).brighten(colorLow).hex(),
+          buttonDevicePressed: chroma(state.headerColor).brighten(colorMed).hex(),
           buttonPlus: state.headerColor ,
-          buttonPlusHover: chroma(state.headerColor).brighten().hex(),
-          buttonPlusPressed: chroma(state.headerColor).brighten(2).hex(),
+          buttonPlusHover: chroma(state.headerColor).brighten(colorLow).hex(),
+          buttonPlusPressed: chroma(state.headerColor).brighten(colorMed).hex(),
         };  
       }
       if(nbRatio > 4.75 && nbRatio < 14) {
         state.textColor = chroma('gray').luminance(0.95).hex();
         state.headerComputedColors = {
           buttonStatus: state.headerColor ,
-          buttonStatusHover: chroma(state.headerColor).darken().hex(),
-          buttonStatusPressed:  chroma(state.headerColor).darken(2).hex(),
-          searchBar: chroma(state.headerColor).brighten().hex(),
-          searchBarHover: chroma(state.headerColor).darken().hex(),
-          searchBarPressed: chroma(state.headerColor).darken(2).hex(),
+          buttonStatusHover: chroma(state.headerColor).darken(colorLow).hex(),
+          buttonStatusPressed:  chroma(state.headerColor).darken(colorMed).hex(),
+          searchBar: chroma(state.headerColor).brighten(colorLow).hex(),
+          searchBarHover: chroma(state.headerColor).darken(colorLow).hex(),
+          searchBarPressed: chroma(state.headerColor).darken(colorMed).hex(),
           buttonDevice: state.headerColor ,
-          buttonDeviceHover: chroma(state.headerColor).darken().hex(),
-          buttonDevicePressed: chroma(state.headerColor).darken(2).hex(),
+          buttonDeviceHover: chroma(state.headerColor).darken(colorLow).hex(),
+          buttonDevicePressed: chroma(state.headerColor).darken(colorMed).hex(),
           buttonPlus: state.headerColor ,
-          buttonPlusHover: chroma(state.headerColor).darken().hex(),
-          buttonPlusPressed: chroma(state.headerColor).darken(2).hex(),
+          buttonPlusHover: chroma(state.headerColor).darken(colorLow).hex(),
+          buttonPlusPressed: chroma(state.headerColor).darken(colorMed).hex(),
         };  
       }
       if(nbRatio >= 14) {
         state.textColor = chroma('gray').luminance(0.95).hex();
         state.headerComputedColors = {
           buttonStatus: state.headerColor ,
-          buttonStatusHover: chroma(state.headerColor).brighten().hex(),
-          buttonStatusPressed:  chroma(state.headerColor).brighten(2).hex(),
-          searchBar: chroma(state.headerColor).brighten().hex(),
-          searchBarHover: chroma(state.headerColor).brighten(2).hex(),
-          searchBarPressed: chroma(state.headerColor).brighten(3).hex(),
+          buttonStatusHover: chroma(state.headerColor).brighten(colorLow).hex(),
+          buttonStatusPressed:  chroma(state.headerColor).brighten(colorMed).hex(),
+          searchBar: chroma(state.headerColor).brighten(colorLow).hex(),
+          searchBarHover: chroma(state.headerColor).brighten(colorMed).hex(),
+          searchBarPressed: chroma(state.headerColor).brighten(colorHigher).hex(),
           buttonDevice: state.headerColor ,
-          buttonDeviceHover: chroma(state.headerColor).brighten().hex(),
-          buttonDevicePressed: chroma(state.headerColor).brighten(2).hex(),
+          buttonDeviceHover: chroma(state.headerColor).brighten(colorLow).hex(),
+          buttonDevicePressed: chroma(state.headerColor).brighten(colorMed).hex(),
           buttonPlus: state.headerColor ,
-          buttonPlusHover: chroma(state.headerColor).brighten().hex(),
-          buttonPlusPressed: chroma(state.headerColor).brighten(2).hex(),
+          buttonPlusHover: chroma(state.headerColor).brighten(colorLow).hex(),
+          buttonPlusPressed: chroma(state.headerColor).brighten(colorMed).hex(),
       };  
       }
       console.log(state.headerComputedColors);    

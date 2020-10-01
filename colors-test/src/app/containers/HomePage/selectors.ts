@@ -24,3 +24,7 @@ export const selectTextColor = createSelector(
   [selectDomain],
   pickerState => pickerState.textColor,
 );
+export const selectColorsVariation = createSelector(
+  [selectDomain],
+  pickerState => pickerState.colorsVariation,
+);
