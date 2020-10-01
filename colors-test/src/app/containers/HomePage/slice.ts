@@ -25,7 +25,7 @@ export const initialState: ContainerState = {
     high: 1.5,
     medium: 1,
     low: 0.5,
-    bypass: false
+    bypass: true
   }
 };
 
