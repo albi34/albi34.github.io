@@ -26,6 +26,7 @@ export type ColorsVariation = {
   high: number;
   medium: number;
   low: number;
+  bypass: boolean;
 }
 
 /* --- STATE --- */

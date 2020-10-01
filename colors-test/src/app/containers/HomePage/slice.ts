@@ -24,7 +24,8 @@ export const initialState: ContainerState = {
   colorsVariation: {
     high: 1.5,
     medium: 1,
-    low: 0.5
+    low: 0.5,
+    bypass: false
   }
 };
 
@@ -34,7 +35,11 @@ const pickerSlice = createSlice({
   initialState,
   reducers: {
     changeColorVariation(state, action: PayloadAction<any>) {      
+      state.colorsVariation.bypass = false; 
       state.colorsVariation[action.payload.key] = action.payload.value;      
+    },
+    useDefaultColorVariation(state) { 
+      state.colorsVariation.bypass = true; 
     },
     changeColor(state, action: PayloadAction<string>) {
       state.headerColor = action.payload;
@@ -45,6 +50,11 @@ const pickerSlice = createSlice({
       let colorLow = state.colorsVariation.low;
       if(nbRatio <= 1.2 ) {        
         state.textColor = chroma('gray').luminance(0).hex();
+        if(state.colorsVariation.bypass){
+          colorHigher = 0.25;
+          colorMed = 0.5;
+          colorLow = 0.75;
+        }
         state.headerComputedColors = {
           buttonStatus: state.headerColor ,
           buttonStatusHover: chroma(state.headerColor).darken(colorLow).hex(),
@@ -62,6 +72,11 @@ const pickerSlice = createSlice({
       }
       if(nbRatio > 1.2 && nbRatio <= 4.75) {
         state.textColor = chroma('gray').luminance(0).hex();
+        if(state.colorsVariation.bypass){
+          colorHigher = 0.4;
+          colorMed = 0.4;
+          colorLow = 0.8;
+        }
         state.headerComputedColors = {
           buttonStatus: state.headerColor ,
           buttonStatusHover: chroma(state.headerColor).brighten(colorLow).hex(),
@@ -78,6 +93,11 @@ const pickerSlice = createSlice({
         };  
       }
       if(nbRatio > 4.75 && nbRatio < 14) {
+        if(state.colorsVariation.bypass){
+          colorHigher = 0.4;
+          colorMed = 0.4;
+          colorLow = 0.8;
+        }
         state.textColor = chroma('gray').luminance(0.95).hex();
         state.headerComputedColors = {
           buttonStatus: state.headerColor ,
@@ -95,6 +115,11 @@ const pickerSlice = createSlice({
         };  
       }
       if(nbRatio >= 14) {
+        if(state.colorsVariation.bypass){
+          colorHigher = 0.5;
+          colorMed = 1;
+          colorLow = 1.5;
+        }
         state.textColor = chroma('gray').luminance(0.95).hex();
         state.headerComputedColors = {
           buttonStatus: state.headerColor ,

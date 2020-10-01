@@ -25,12 +25,15 @@ export function Picker() {
   const textColor = useSelector(selectTextColor);
   const onChangeColor = (evt: PickerEvent) => {
     dispatch(actions.changeColor(evt.hex));
-    console.log(headerColor);
   }; 
   const onChangeColorVariation = (
     evt: React.ChangeEvent<HTMLInputElement>,
     variation: string ) => {
     dispatch(actions.changeColorVariation({ value: evt.currentTarget.value, key: variation}));
+    dispatch(actions.changeColor(headerColor));
+  };
+  const onClickUseDefaultColorVariation = () => {
+    dispatch(actions.useDefaultColorVariation());
     dispatch(actions.changeColor(headerColor));
   };
 
@@ -39,9 +42,16 @@ export function Picker() {
   return (
     <>
       <Title as="h2">Select a color</Title>
-      Variation low: <input type="text" onChange={ e => onChangeColorVariation(e, "low") } value={colorsVariation.low}></input>
-      Variation medium: <input type="text" onChange={ e => onChangeColorVariation(e, "medium") } value={colorsVariation.medium}></input>
-      Variation high: <input type="text" onChange={ e => onChangeColorVariation(e, "high") } value={colorsVariation.high}></input>
+      low: <input type="text" onChange={ e => onChangeColorVariation(e, "low") } value={colorsVariation.low}></input>
+      medium: <input type="text" onChange={ e => onChangeColorVariation(e, "medium") } value={colorsVariation.medium}></input>
+      high: <input type="text" onChange={ e => onChangeColorVariation(e, "high") } value={colorsVariation.high}></input>
+      <button
+        onClick={() => {
+          onClickUseDefaultColorVariation();
+        }}
+      >
+        Use Defaults
+      </button>
       <SketchPicker 
         color={ headerColor }
         onChangeComplete={ onChangeColor }
