@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-import { useDispatch } from 'react-redux';
 type InputProps = React.DetailedHTMLProps<
   React.InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
@@ -10,6 +9,6 @@ interface Props extends InputProps {
 export const ContrastRatio = memo(({ ratio, ...restOf }: Props) => {
   
   return (
-    <h2>Contrast Ratio is: {ratio}</h2>
+    <h4>Contrast Ratio is: {ratio}</h4>
   );
 });

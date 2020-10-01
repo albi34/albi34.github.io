@@ -77,7 +77,7 @@ const pickerSlice = createSlice({
         state.textColor = chroma('gray').luminance(0).hex();
         if(state.colorsVariation.bypass){
           state.colorsVariation.low = 0.4;
-          state.colorsVariation.medium = 0.4;
+          state.colorsVariation.medium = 0.8;
           state.colorsVariation.high = 0.8;
           colorHigher = state.colorsVariation.high;
           colorMed = state.colorsVariation.medium;
@@ -101,7 +101,7 @@ const pickerSlice = createSlice({
       if(nbRatio > 4.75 && nbRatio < 14) {
         if(state.colorsVariation.bypass){
           state.colorsVariation.low = 0.4;
-          state.colorsVariation.medium = 0.4;
+          state.colorsVariation.medium = 0.8;
           state.colorsVariation.high = 0.8;
           colorHigher = state.colorsVariation.high;
           colorMed = state.colorsVariation.medium;
@@ -148,7 +148,6 @@ const pickerSlice = createSlice({
           buttonPlusPressed: chroma(state.headerColor).brighten(colorMed).hex(),
       };  
       }
-      console.log(state.headerComputedColors);    
     }
   },
 });
