@@ -48,7 +48,7 @@ const pickerSlice = createSlice({
       let colorHigher = state.colorsVariation.high;
       let colorMed = state.colorsVariation.medium;
       let colorLow = state.colorsVariation.low;
-      if(nbRatio <= 1.2 ) {        
+      if(nbRatio <= 1.34 ) {        
         state.textColor = chroma('gray').luminance(0).hex();
         if(state.colorsVariation.bypass){
           state.colorsVariation.low = 0.25;
@@ -73,7 +73,7 @@ const pickerSlice = createSlice({
           buttonPlusPressed: chroma(state.headerColor).darken(colorMed).hex()
         };  
       }
-      if(nbRatio > 1.2 && nbRatio <= 4.75) {
+      if(nbRatio > 1.34 && nbRatio <= 4.75) {
         state.textColor = chroma('gray').luminance(0).hex();
         if(state.colorsVariation.bypass){
           state.colorsVariation.low = 0.4;
@@ -98,7 +98,7 @@ const pickerSlice = createSlice({
           buttonPlusPressed: chroma(state.headerColor).brighten(colorMed).hex(),
         };  
       }
-      if(nbRatio > 4.75 && nbRatio < 14) {
+      if(nbRatio > 4.75 && nbRatio < 11.25) {
         if(state.colorsVariation.bypass){
           state.colorsVariation.low = 0.4;
           state.colorsVariation.medium = 0.8;
@@ -123,7 +123,7 @@ const pickerSlice = createSlice({
           buttonPlusPressed: chroma(state.headerColor).darken(colorMed).hex(),
         };  
       }
-      if(nbRatio >= 14) {
+      if(nbRatio >= 11.25) {
         if(state.colorsVariation.bypass){
           state.colorsVariation.low = 0.5;
           state.colorsVariation.medium = 1;
