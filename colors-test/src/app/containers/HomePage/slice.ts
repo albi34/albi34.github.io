@@ -51,9 +51,12 @@ const pickerSlice = createSlice({
       if(nbRatio <= 1.2 ) {        
         state.textColor = chroma('gray').luminance(0).hex();
         if(state.colorsVariation.bypass){
-          colorHigher = 0.25;
-          colorMed = 0.5;
-          colorLow = 0.75;
+          state.colorsVariation.low = 0.25;
+          state.colorsVariation.medium = 0.5;
+          state.colorsVariation.high = 0.75;
+          colorHigher = state.colorsVariation.high;
+          colorMed = state.colorsVariation.medium;
+          colorLow = state.colorsVariation.low;
         }
         state.headerComputedColors = {
           buttonStatus: state.headerColor ,
@@ -73,9 +76,12 @@ const pickerSlice = createSlice({
       if(nbRatio > 1.2 && nbRatio <= 4.75) {
         state.textColor = chroma('gray').luminance(0).hex();
         if(state.colorsVariation.bypass){
-          colorHigher = 0.4;
-          colorMed = 0.4;
-          colorLow = 0.8;
+          state.colorsVariation.low = 0.4;
+          state.colorsVariation.medium = 0.4;
+          state.colorsVariation.high = 0.8;
+          colorHigher = state.colorsVariation.high;
+          colorMed = state.colorsVariation.medium;
+          colorLow = state.colorsVariation.low;
         }
         state.headerComputedColors = {
           buttonStatus: state.headerColor ,
@@ -94,9 +100,12 @@ const pickerSlice = createSlice({
       }
       if(nbRatio > 4.75 && nbRatio < 14) {
         if(state.colorsVariation.bypass){
-          colorHigher = 0.4;
-          colorMed = 0.4;
-          colorLow = 0.8;
+          state.colorsVariation.low = 0.4;
+          state.colorsVariation.medium = 0.4;
+          state.colorsVariation.high = 0.8;
+          colorHigher = state.colorsVariation.high;
+          colorMed = state.colorsVariation.medium;
+          colorLow = state.colorsVariation.low;
         }
         state.textColor = chroma('gray').luminance(0.95).hex();
         state.headerComputedColors = {
@@ -116,9 +125,12 @@ const pickerSlice = createSlice({
       }
       if(nbRatio >= 14) {
         if(state.colorsVariation.bypass){
-          colorHigher = 0.5;
-          colorMed = 1;
-          colorLow = 1.5;
+          state.colorsVariation.low = 0.5;
+          state.colorsVariation.medium = 1;
+          state.colorsVariation.high = 1.5;
+          colorHigher = state.colorsVariation.high;
+          colorMed = state.colorsVariation.medium;
+          colorLow = state.colorsVariation.low;
         }
         state.textColor = chroma('gray').luminance(0.95).hex();
         state.headerComputedColors = {
