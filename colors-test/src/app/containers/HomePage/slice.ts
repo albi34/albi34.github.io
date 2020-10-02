@@ -63,8 +63,8 @@ const pickerSlice = createSlice({
           buttonStatusHover: chroma(state.headerColor).darken(colorLow).hex(),
           buttonStatusPressed:  chroma(state.headerColor).darken(colorMed).hex(),
           searchBar: chroma(state.headerColor).darken(colorLow).hex(),
-          searchBarHover: chroma(state.headerColor).darken(colorMed).hex(),
-          searchBarPressed: chroma(state.headerColor).darken(colorHigher).hex(),
+          searchBarHover: chroma(state.headerColor).darken(colorLow).hex(),
+          searchBarPressed: chroma(state.headerColor).darken(colorMed).hex(),
           buttonDevice: state.headerColor ,
           buttonDeviceHover: chroma(state.headerColor).darken(colorLow).hex(),
           buttonDevicePressed: chroma(state.headerColor).darken(colorMed).hex(),
@@ -87,7 +87,7 @@ const pickerSlice = createSlice({
           buttonStatus: state.headerColor ,
           buttonStatusHover: chroma(state.headerColor).brighten(colorLow).hex(),
           buttonStatusPressed:  chroma(state.headerColor).brighten(colorMed).hex(),
-          searchBar: chroma(state.headerColor).brighten(colorLow).hex(),
+          searchBar: chroma(state.headerColor).brighten(colorMed).hex(),
           searchBarHover: chroma(state.headerColor).brighten(colorLow).hex(),
           searchBarPressed: chroma(state.headerColor).brighten(colorMed).hex(),
           buttonDevice: state.headerColor ,
@@ -100,9 +100,9 @@ const pickerSlice = createSlice({
       }
       if(nbRatio > 4.75 && nbRatio < 11.25) {
         if(state.colorsVariation.bypass){
-          state.colorsVariation.low = 0.4;
-          state.colorsVariation.medium = 0.8;
-          state.colorsVariation.high = 0.8;
+          state.colorsVariation.low = 0.5;
+          state.colorsVariation.medium = 0.9;
+          state.colorsVariation.high = 0.9;
           colorHigher = state.colorsVariation.high;
           colorMed = state.colorsVariation.medium;
           colorLow = state.colorsVariation.low;
@@ -112,7 +112,7 @@ const pickerSlice = createSlice({
           buttonStatus: state.headerColor ,
           buttonStatusHover: chroma(state.headerColor).darken(colorLow).hex(),
           buttonStatusPressed:  chroma(state.headerColor).darken(colorMed).hex(),
-          searchBar: chroma(state.headerColor).brighten(colorLow).hex(),
+          searchBar: chroma(state.headerColor).darken(colorMed).hex(),
           searchBarHover: chroma(state.headerColor).darken(colorLow).hex(),
           searchBarPressed: chroma(state.headerColor).darken(colorMed).hex(),
           buttonDevice: state.headerColor ,
@@ -125,8 +125,8 @@ const pickerSlice = createSlice({
       }
       if(nbRatio >= 11.25) {
         if(state.colorsVariation.bypass){
-          state.colorsVariation.low = 0.5;
-          state.colorsVariation.medium = 1;
+          state.colorsVariation.low = 0.8;
+          state.colorsVariation.medium = 1.2;
           state.colorsVariation.high = 1.5;
           colorHigher = state.colorsVariation.high;
           colorMed = state.colorsVariation.medium;
@@ -137,9 +137,9 @@ const pickerSlice = createSlice({
           buttonStatus: state.headerColor ,
           buttonStatusHover: chroma(state.headerColor).brighten(colorLow).hex(),
           buttonStatusPressed:  chroma(state.headerColor).brighten(colorMed).hex(),
-          searchBar: chroma(state.headerColor).brighten(colorLow).hex(),
-          searchBarHover: chroma(state.headerColor).brighten(colorMed).hex(),
-          searchBarPressed: chroma(state.headerColor).brighten(colorHigher).hex(),
+          searchBar: chroma(state.headerColor).brighten(colorMed).hex(),
+          searchBarHover: chroma(state.headerColor).brighten(colorLow).hex(),
+          searchBarPressed: chroma(state.headerColor).brighten(colorMed).hex(),
           buttonDevice: state.headerColor ,
           buttonDeviceHover: chroma(state.headerColor).brighten(colorLow).hex(),
           buttonDevicePressed: chroma(state.headerColor).brighten(colorMed).hex(),

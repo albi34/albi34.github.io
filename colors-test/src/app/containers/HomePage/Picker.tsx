@@ -30,7 +30,7 @@ export function Picker() {
 
   const debouncedonChangeColor = debounce((newColor) => {
       dispatch(actions.changeColor(newColor));
-  }, 200);
+  }, 50);
 
   const onChangeColorVariation = (
     evt: React.ChangeEvent<HTMLInputElement>,
@@ -46,16 +46,16 @@ export function Picker() {
 
   return (
     <>      
-      <h2>Color tester</h2>
+      <h1>Color tester</h1>
       <Content>
         <Title as="h2">1. Select a color</Title>
-        <input type="color" value={ headerColor } onChange={ e => debouncedonChangeColor(e.currentTarget.value) }></input>      
+        <SketchPicker  color={ headerColor } onChange={ e => debouncedonChangeColor(e.hex) }></SketchPicker>   
       </Content>
       <Content>
         <Title as="h2">2. Select variation ratios (for darken / brighten calculations)</Title>
-        low: <input type="text" onChange={ e => onChangeColorVariation(e, "low") } value={colorsVariation.low}></input><br/><br/>
-        medium: <input type="text" onChange={ e => onChangeColorVariation(e, "medium") } value={colorsVariation.medium}></input><br/><br/>
-        high: <input type="text" onChange={ e => onChangeColorVariation(e, "high") } value={colorsVariation.high}></input>
+        <LabelStyled for="colorlow">low:</LabelStyled><input id="colorlow" type="number" onChange={ e => onChangeColorVariation(e, "low") } value={colorsVariation.low}></input><br/><br/>
+        <LabelStyled for="colormed">medium:</LabelStyled> <input id="colormed" type="number" onChange={ e => onChangeColorVariation(e, "medium") } value={colorsVariation.medium}></input><br/><br/>
+        <LabelStyled for="colorhigh">high:</LabelStyled> <input id="colorhigh" type="number" onChange={ e => onChangeColorVariation(e, "high") } value={colorsVariation.high}></input>
       </Content>
       <Content>
         <Title as="h2">OR: Use default values (click any time to reset)</Title>
@@ -70,22 +70,38 @@ export function Picker() {
       <Content>
         <Title as="h2">Results:</Title>
         <ContrastRatio ratio={headerRatio}/>
+        <ColorContent>
           {Object.keys(headerComputedColors).map( item => (
-            <ColorizedDiv key={item} txtcolor={textColor} bgcolor={headerComputedColors[item]}>{item}</ColorizedDiv>
+            <ColorizedDiv key={item}  bgcolor={headerComputedColors[item]}><MiddleSpan txtcolor={textColor}>{item}</MiddleSpan></ColorizedDiv>
           ))}
+          </ColorContent>
         </Content>
     </>
   );
 }
-const ColorizedDiv = styled.div<{bgcolor: string, txtcolor: string}>`
-  display: block;
-  float:left;
+const ColorContent = styled.div`
+  display: inline-block;
+  width:650px;
+`;
+
+const LabelStyled = styled.label<{for: string}>`  
+  display: inline-block;
+  width: 100px;
+`;
+const MiddleSpan = styled.span<{txtcolor: string}>`  
+  display: inline-block;
+  vertical-align: middle;
+  color: ${props => props.txtcolor};
+  text-align: center;
+  line-height: 50px;
+`;
+const ColorizedDiv = styled.div<{bgcolor: string}>`
+  display: inline-block;
   position:relative;
   width:200px;
   height:50px;
   margin-right: 5px;
   margin-top: 5px;
-  color: ${props => props.txtcolor};
   text-align: center;
   background: ${props => props.bgcolor}
 `;
