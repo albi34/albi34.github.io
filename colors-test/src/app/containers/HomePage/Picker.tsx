@@ -55,7 +55,6 @@ export function Picker() {
         <Title as="h2">2. Select variation ratios (for darken / brighten calculations)</Title>
         <LabelStyled for="colorlow">low:</LabelStyled><input id="colorlow" type="number" onChange={ e => onChangeColorVariation(e, "low") } value={colorsVariation.low}></input><br/><br/>
         <LabelStyled for="colormed">medium:</LabelStyled> <input id="colormed" type="number" onChange={ e => onChangeColorVariation(e, "medium") } value={colorsVariation.medium}></input><br/><br/>
-        <LabelStyled for="colorhigh">high:</LabelStyled> <input id="colorhigh" type="number" onChange={ e => onChangeColorVariation(e, "high") } value={colorsVariation.high}></input>
       </Content>
       <Content>
         <Title as="h2">OR: Use default values (click any time to reset)</Title>
